@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My AI Assistant</title>
+    <title>WAREALLY CHATBOT</title>
 
     <link rel="stylesheet" href="/static/style.css">
 </head>
@@ -14,39 +14,73 @@
 
     <div class="chat-container">
 
+        <!-- HEADER -->
         <header class="chat-header">
-            <h2>My AI Assistant</h2>
-            <p>Ask me anything</p>
-        </header>
 
-        <div class="chat-box" id="chatBox">
+            <div class="brand">
+                <div class="brand-logo">W</div>
 
-            <div class="message ai-message">
-                Hello! I am your Wareally AI Assistant.
+                <div class="brand-info">
+                    <h2>WAREALLY CHATBOT</h2>
+                    <p>Your AI Assistant</p>
+                </div>
             </div>
 
-        </div>
+            <div class="online-status">
+                <span class="status-dot"></span>
+                Online
+            </div>
 
-        <div class="chat-input">
+        </header>
+
+
+        <!-- CHAT AREA -->
+        <main class="chat-box" id="chatBox">
+
+            <!-- WELCOME SCREEN -->
+            <div class="welcome-screen" id="welcomeScreen">
+
+                <div class="welcome-logo">W</div>
+
+                <h1>Welcome to Wareally</h1>
+
+                <p>
+                    Your intelligent AI assistant.
+                    Ask questions, learn new things
+                    and explore ideas.
+                </p>
+
+            </div>
+
+        </main>
+
+
+        <!-- MESSAGE INPUT -->
+        <footer class="chat-input">
 
             <input
                 type="text"
                 id="userInput"
-                placeholder="Type your message..."
+                placeholder="Message Wareally..."
+                autocomplete="off"
             >
 
-            <button id="sendBtn">Send</button>
+            <button id="sendBtn" aria-label="Send message">
+                Send
+            </button>
 
-        </div>
+        </footer>
 
     </div>
 
+
+    <!-- MARKDOWN LIBRARIES -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 
-<script src="/static/script.js"></script>
+    <!-- MAIN JAVASCRIPT -->
+    <script src="/static/script.js"></script>
 
 </body>
 </html>
-
