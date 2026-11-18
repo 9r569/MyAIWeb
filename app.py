@@ -36,15 +36,32 @@ def chat():
 
     url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent"
 
-    payload = {
-        "contents": [
+    
+payload = {
+    "systemInstruction": {
+        "parts": [
             {
-                "parts": [
-                    {"text": user_message}
-                ]
+                "text": (
+                    "Your name is WAREALLY CHATBOT. "
+                    "You are the Wareally AI Assistant. "
+                    "Whenever someone asks your name or identity, "
+                    "introduce yourself by saying: "
+                    "'I am your Wareally AI Assistant.' "
+                    "Always maintain this identity. "
+                    "Be friendly, helpful and professional."
+                )
             }
         ]
-    }
+    },
+
+    "contents": [
+        {
+            "parts": [
+                {"text": user_message}
+            ]
+        }
+    ]
+}
 
     req = urllib.request.Request(
         url,
