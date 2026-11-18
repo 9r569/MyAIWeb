@@ -1,0 +1,166 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f3f6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-container {
+    width: 95%;
+    max-width: 500px;
+    height: 600px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: #294d70;
+    color: white;
+    padding: 20px;
+}
+
+.chat-header h2 {
+    font-size: 20px;.user-message {
+    background: #294d70;
+    color: white;
+    margin-left: auto;
+    }
+}
+
+.chat-header p {
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    max-width: 85%;
+    font-size: 14px;
+}
+
+.ai-message {
+    background: #e8edf3;
+    color: #222;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    gap: 10px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex: 1;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    outline: none;
+}
+
+.chat-input button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 7px;
+    background: #294d70;
+    color: white;
+    cursor: pointer;
+}
+
+
+.ai-message pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+    padding: 12px;
+    margin: 10px 0;
+    background: #f1f3f6;
+    border-radius: 8px;
+}
+
+.ai-message pre code {
+    display: block;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.ai-message p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.ai-message h1,
+.ai-message h2,
+.ai-message h3 {
+    margin: 12px 0 8px;
+}
+
+
+.typing-indicator {
+    background: #e8edf3;
+    color: #294d70;
+    padding: 12px;
+    border-radius: 10px;
+    width: fit-content;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.typing-indicator span {
+    animation: typing 1.2s infinite;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        opacity: 0.2;
+    }
+    30% {
+        opacity: 1;
+    }
+}
+
+
+
+.ai-message {
+    min-width: 0;
+    max-width: 85%;
+    overflow-wrap: anywhere;
+    word-wrap: break-word;
+}
+
+.ai-message p,
+.ai-message li,
+.ai-message h1,
+.ai-message h2,
+.ai-message h3 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.ai-message pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+}
