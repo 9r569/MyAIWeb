@@ -33,6 +33,7 @@ def chat():
         }), 400
 
     user_message = data.get("message", "").strip()
+   history = data.get("history", [])
 
     if not user_message:
         return jsonify({
@@ -59,7 +60,7 @@ def chat():
     payload = {
 
            
-"systemInstruction": {
+ "systemInstruction": {
     "parts": [
         {
             "text": (
