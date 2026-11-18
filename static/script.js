@@ -4,6 +4,9 @@ const sendBtn = document.getElementById("sendBtn");
 const chatBox = document.getElementById("chatBox");
 const welcomeScreen = document.getElementById("welcomeScreen");
 
+// Store conversation history
+const conversationHistory = [];
+
 sendBtn.addEventListener("click", sendMessage);
 
 userInput.addEventListener("keydown", function(event) {
@@ -28,6 +31,12 @@ async function sendMessage() {
         return;
     }
 
+    if (sendBtn.disabled) {
+        return;
+    }
+
+    sendBtn.disabled = true;
+
     // Remove welcome screen
     if (welcomeScreen) {
         welcomeScreen.remove();
@@ -46,7 +55,7 @@ async function sendMessage() {
     scrollToBottom();
 
 
-    // Show AI typing indicator
+    // Show typing indicator
     const typingIndicator = document.createElement("div");
 
     typingIndicator.className = "typing-indicator";
@@ -65,8 +74,9 @@ async function sendMessage() {
 
     try {
 
-        // Send message to Python
+        // Send message and previous history to Python
         const response = await fetch("/chat", {
+
             method: "POST",
 
             headers: {
@@ -74,15 +84,23 @@ async function sendMessage() {
             },
 
             body: JSON.stringify({
-                message: message
+
+                message: message,
+
+                history: conversationHistory.slice(-20)
+
             })
+
         });
 
 
-        // Receive Python response
         const data = await response.json();
 
         typingIndicator.remove();
+
+        if (!response.ok) {
+            throw new Error(data.reply || "AI request failed.");
+        }
 
 
         // Display AI response
@@ -95,6 +113,34 @@ async function sendMessage() {
         );
 
         chatBox.appendChild(aiMessage);
+
+
+        // Save successful conversation
+        conversationHistory.push(
+            {
+                role: "user",
+                parts: [
+                    { text: message }
+                ]
+            },
+            {
+                role: "model",
+                parts: [
+                    { text: data.reply }
+                ]
+            }
+        );
+
+
+        // Keep only the latest 20 messages
+        if (conversationHistory.length > 20) {
+
+            conversationHistory.splice(
+                0,
+                conversationHistory.length - 20
+            );
+
+        }
 
         scrollToBottom();
 
@@ -110,11 +156,17 @@ async function sendMessage() {
         errorMessage.className = "message ai-message";
 
         errorMessage.textContent =
-            "Could not connect to AI server. Please try again.";
+            error.message || "Could not connect to AI server.";
 
         chatBox.appendChild(errorMessage);
 
         scrollToBottom();
+
+    } finally {
+
+        sendBtn.disabled = false;
+
+        userInput.focus();
 
     }
 
