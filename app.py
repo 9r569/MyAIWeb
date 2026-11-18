@@ -33,7 +33,45 @@ def chat():
         }), 400
 
     user_message = data.get("message", "").strip()
-   history = data.get("history", [])
+     
+history = data.get("history", [])
+
+# Validate conversation history
+if not isinstance(history, list):
+    history = []
+
+history = history[-20:]
+
+validated_history = []
+
+for item in history:
+
+    if not isinstance(item, dict):
+        continue
+
+    role = item.get("role")
+    parts = item.get("parts")
+
+    if role not in ("user", "model"):
+        continue
+
+    if not isinstance(parts, list) or not parts:
+        continue
+
+    if not isinstance(parts[0], dict):
+        continue
+
+    text = parts[0].get("text")
+
+    if isinstance(text, str) and text.strip():
+
+        validated_history.append({
+            "role": role,
+            "parts": [
+                {"text": text[:10000]}
+            ]
+        })
+
 
     if not user_message:
         return jsonify({
@@ -94,7 +132,7 @@ payload = {
         ]
     },
 
-    "contents": history + [
+    "contents": validated_history + [
         {
             "role": "user",
             "parts": [
