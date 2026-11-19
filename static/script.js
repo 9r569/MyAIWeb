@@ -5,7 +5,9 @@ const chatBox = document.getElementById("chatBox");
 const welcomeScreen = document.getElementById("welcomeScreen");
 
 // Store conversation history
-const conversationHistory = [];
+const conversationHistory = JSON.parse(
+    localStorage.getItem("wareallyHistory")
+) || [];
 
 sendBtn.addEventListener("click", sendMessage);
 
