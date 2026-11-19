@@ -24,6 +24,53 @@ function scrollToBottom() {
 }
 
 
+function loadChatHistory() {
+
+    if (conversationHistory.length === 0) {
+        return;
+    }
+
+    if (welcomeScreen) {
+        welcomeScreen.remove();
+    }
+
+    conversationHistory.forEach(item => {
+
+        const messageText = item.parts[0].text;
+
+        const messageElement = document.createElement("div");
+
+        messageElement.className = "message";
+
+        if (item.role === "user") {
+
+            messageElement.classList.add("user-message");
+
+            messageElement.textContent = messageText;
+
+        } else if (item.role === "model") {
+
+            messageElement.classList.add("ai-message");
+
+            messageElement.innerHTML = DOMPurify.sanitize(
+                marked.parse(messageText)
+            );
+
+        } else {
+            return;
+        }
+
+        chatBox.appendChild(messageElement);
+
+    });
+
+    scrollToBottom();
+}
+
+loadChatHistory();
+
+
+
 // SEND MESSAGE
 async function sendMessage() {
 
