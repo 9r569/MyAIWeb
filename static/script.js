@@ -143,6 +143,10 @@ async function sendMessage() {
             );
 
         }
+      localStorage.setItem(
+    "wareallyHistory",
+    JSON.stringify(conversationHistory)
+);
 
         scrollToBottom();
 
